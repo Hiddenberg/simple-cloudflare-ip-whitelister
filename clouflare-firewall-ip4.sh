@@ -18,5 +18,5 @@ declare -a cloudflareV4Ips=("173.245.48.0/20"
 
 for ip in "${cloudflareV4Ips[@]}";
 do
-   sudo ufw allow $ip any port 80,443;
+   sudo ufw allow from $ip to any port 80,443;
 done
