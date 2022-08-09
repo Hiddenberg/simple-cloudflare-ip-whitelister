@@ -1,12 +1,10 @@
-declare -a cloudflareV6Ips=("2400:cb00::/32"
-   "2606:4700::/32"
-   "2803:f800::/32"
-   "2405:b500::/32"
-   "2405:8100::/32"
-   "2a06:98c0::/29"
-   "2c0f:f248::/32")
+#!/bin/bash
 
-for ip in "${cloudflareV6Ips[@]}";
+cloudflareV6Ips=$(curl -s https://www.cloudflare.com/ips-v6)
+
+for ip in ${cloudflareV6Ips[@]};
 do
+   echo "adding $ip to the white list..."
    sudo ufw allow from $ip to any port 80,443 proto tcp;
+   echo -e "\n"
 done
